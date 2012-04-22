@@ -75,10 +75,8 @@ JNIEXPORT void JNICALL Java_org_libvisual_android_VisualObject_init(JNIEnv * env
     LOGI("LibVisual.init(): %s", visual_get_version());
 
     
-#ifdef NDEBUG
     int foo = 1;
     while(foo);
-#endif
        
     /* register VisLog handler to make it log to android logcat */
     visual_log_set_handler(VISUAL_LOG_DEBUG, _log_handler, NULL);
@@ -119,16 +117,15 @@ JNIEXPORT void JNICALL Java_org_libvisual_android_VisualObject_fpsInit(JNIEnv * 
     fps_init(&_v.fps);
 }
 
-
 /** VisualObject.renderVisual() */
 JNIEXPORT void JNICALL Java_org_libvisual_android_VisualObject_renderVisual(JNIEnv * env, 
                                                                                    jclass clazz, 
                                                                                    jobject bitmap,
-                                                                                   jint bin,
-                                                                                   jint video)
+                                                                                   jobject bin,
+                                                                                   jobject video)
 {
-    VisBin *b = (VisBin *) bin;
-    VisVideo *bvideo = (VisVideo *) video;
+    VisBin *b = getObjectFromCPtr<VisBin *>(env, bin);
+    VisVideo *bvideo = getObjectFromCPtr<VisVideo *>(env, video);
         
     if(!visual_is_initialized() ||
        !bvideo ||

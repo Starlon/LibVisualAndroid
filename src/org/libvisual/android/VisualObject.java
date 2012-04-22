@@ -80,6 +80,7 @@ public class VisualObject {
         mVideo.setAttributes(width, height,
                              stride,
                              VisVideo.VISUAL_VIDEO_DEPTH_32BIT);
+        mVideo.allocateBuffer();
 
         /* get depth from actor */
         int actorDepth = mActor.getSupportedDepth();
@@ -148,9 +149,12 @@ public class VisualObject {
         }
         else
         {
+            mVideo.freeBuffer();
+
             mVideo.setAttributes(w, h,
                                     mBitmap.getRowBytes(),
                                     VisVideo.VISUAL_VIDEO_DEPTH_32BIT);
+            mVideo.allocateBuffer();
 
             /* create new VisVideo object for this bitmap */
             mBin.setVideo(mVideo.VisVideo);

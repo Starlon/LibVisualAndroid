@@ -125,4 +125,11 @@ JNIEXPORT void JNICALL Java_org_libvisual_android_VisVideo_videoAllocateBuffer(J
     VisVideo *v = getObjectFromCPtr<VisVideo *>(env, videoPtr);
     visual_video_allocate_buffer(v);
 }
+
+JNIEXPORT void JNICALL Java_org_libvisual_android_VisVideo_videoFreeBuffer(JNIEnv *env, jclass clazz, jobject videoPtr)
+{
+    VisVideo *v = getObjectFromCPtr<VisVideo *>(env, videoPtr);
+    visual_video_free_buffer(v);
+}
+
 }
