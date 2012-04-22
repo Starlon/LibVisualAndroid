@@ -67,11 +67,8 @@ class LibVisualBitmapView extends LibVisualView
             
         Bitmap bitmap = mVisualObject.run();
 
-        /* render */
-        //renderVisual(curBitmap, curBin.VisBin, curBVideo.VisVideo);
         canvas.drawBitmap(bitmap, 0, 0, null);
             
-        /* force a redraw, with a different time-based pattern. */
         invalidate();
     }
 }

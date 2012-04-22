@@ -73,10 +73,11 @@ JNIEXPORT void JNICALL Java_org_libvisual_android_VisualObject_init(JNIEnv * env
                 return;
 
     LOGI("LibVisual.init(): %s", visual_get_version());
-
     
+/*
     int foo = 1;
     while(foo);
+*/
        
     /* register VisLog handler to make it log to android logcat */
     visual_log_set_handler(VISUAL_LOG_DEBUG, _log_handler, NULL);
