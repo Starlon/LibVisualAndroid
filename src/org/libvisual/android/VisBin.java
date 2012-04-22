@@ -29,30 +29,27 @@ package org.libvisual.android;
 /** VisBin wrapper */
 public class VisBin
 {
+    public CPtr VisBin;
+    public VisActor actor;
+    public VisInput input;
+    public VisMorph morph;
+
     /** implemented by visual.c */
-    private native int binNew();
-    private native int binUnref(int binPtr);
-    private native int binSetDepth(int binPtr, int depth);
-    private native int binSetSupportedDepth(int binPtr, int depth);
-    private native int binSetPreferredDepth(int binPtr, int depth);
-    private native int binSetVideo(int binPtr, int videoPtr);
-    private native int binRealize(int binPtr);
-    private native int binSync(int binPtr, boolean noevent);
-    private native int binDepthChanged(int binPtr);
-    private native int binConnect(int binPtr, int actorPtr, int inputPtr);
-    private native int binSetMorphByName(int binPtr, String name);
-    private native int binSwitchActorByName(int binPtr, String name);
-    private native int binGetMorph(int binPtr);
-    private native int binGetActor(int binPtr);
-        
-    private VisVideo video;
-    private VisInput input;
-    private VisActor actor;
-    private VisMorph morph;
-
-    public int VisBin;
-
-        
+    private native CPtr binNew();
+    private native int binUnref(CPtr binPtr);
+    private native int binSetDepth(CPtr binPtr, int depth);
+    private native int binSetSupportedDepth(CPtr binPtr, int depth);
+    private native int binSetPreferredDepth(CPtr binPtr, int depth);
+    private native int binSetVideo(CPtr binPtr, CPtr videoPtr);
+    private native int binRealize(CPtr binPtr);
+    private native int binSync(CPtr binPtr, boolean noevent);
+    private native int binDepthChanged(CPtr binPtr);
+    private native int binConnect(CPtr binPtr, CPtr actorPtr, CPtr inputPtr);
+    private native int binSetMorphByName(CPtr binPtr, String name);
+    private native int binSwitchActorByName(CPtr binPtr, String name);
+    private native CPtr binGetMorph(CPtr binPtr);
+    private native CPtr binGetActor(CPtr binPtr);
+                
         
     public VisBin()
     {
@@ -74,10 +71,9 @@ public class VisBin
         binSetPreferredDepth(VisBin, depth);
     }
 
-    public void setVideo(VisVideo v)
+    public void setVideo(CPtr videoPtr)
     {
-        video = v;
-        binSetVideo(VisBin, v.VisVideo);
+        binSetVideo(VisBin, videoPtr);
     }
 
     public void realize()
@@ -95,11 +91,12 @@ public class VisBin
         binDepthChanged(VisBin);
     }
 
-    public void connect(VisActor a, VisInput i)
+    public void connect(CPtr actorPtr, CPtr inputPtr)
     {
-        actor = a;
-        input = i;
-        binConnect(VisBin, a.VisActor, i.VisInput);
+        binConnect(VisBin, actorPtr, inputPtr);
+        actor = new VisActor(actorPtr);
+        input = new VisInput(inputPtr); 
+        //morph = new VisMorph(morphPtr);
     }
 
     public void setMorph(String name)
@@ -107,14 +104,6 @@ public class VisBin
         binSetMorphByName(VisBin, name);
     }
 
-    public VisMorph getMorph()
-    {
-        if(morph == null)
-            morph = new VisMorph(binGetMorph(VisBin));
-            
-        return morph;
-    }
-        
     public void switchActor(String name)
     {
         binSwitchActorByName(VisBin, name);
@@ -122,10 +111,17 @@ public class VisBin
 
     public VisActor getActor()
     {
-        if(actor == null)
-            actor = new VisActor(binGetActor(VisBin));
-        
         return actor;
+    }
+
+    public VisInput getInput()
+    {
+        return input;
+    }
+
+    public VisMorph getMorph()
+    {
+        return morph;
     }
         
     @Override

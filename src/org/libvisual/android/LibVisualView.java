@@ -30,7 +30,6 @@ import android.graphics.Canvas;
 import android.util.Log;
 
 
-
 /** LibVisualView class to implement different drawing methods */
 public class LibVisualView extends View 
 {        
@@ -61,7 +60,9 @@ public class LibVisualView extends View
     /** set screen-dimming behaviour according to settings */
     public void setScreenDimming()
     {
+
         /* prevent dimming of screen? */
+/*
         String default_prevent_dimming = ctxt.getString(R.string.default_prevent_dimming);
         Boolean preventDimming = s.getBoolean("prefs_prevent_dimming",
                                                 (default_prevent_dimming == "true" ? 
@@ -69,8 +70,8 @@ public class LibVisualView extends View
                                                           false));
         
         Log.v(TAG, "Prevent dimming: "+preventDimming);
-                       
+*/
         /* don't dim screen */
-        setKeepScreenOn(preventDimming);
+//        setKeepScreenOn(preventDimming);
     }
 }

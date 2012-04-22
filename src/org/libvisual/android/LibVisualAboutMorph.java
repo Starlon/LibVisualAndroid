@@ -50,15 +50,15 @@ public class LibVisualAboutMorph extends Activity
         TextView head = new TextView(this);
         head.setTextAppearance(this, android.R.style.TextAppearance_Large);
         head.setTextColor(Color.WHITE);
-        head.setText(LibVisual.curMorph.plugin.getPlugname()+" "+LibVisual.curMorph.plugin.getVersion());
+        head.setText(LibVisual.mVisualObject.mMorph.plugin.getPlugname()+" "+LibVisual.mVisualObject.mMorph.plugin.getVersion());
         l.addView(head);
 
 
         /* description */
         TextView name = new TextView(this);
-        name.setText(LibVisual.curMorph.plugin.getName());
+        name.setText(LibVisual.mVisualObject.mMorph.plugin.getName());
         TextView desc = new TextView(this);
-        desc.setText(LibVisual.curMorph.plugin.getAbout());
+        desc.setText(LibVisual.mVisualObject.mMorph.plugin.getAbout());
         l.addView(name);
         l.addView(desc);
 
@@ -69,7 +69,7 @@ public class LibVisualAboutMorph extends Activity
         title.setText("Author:");
         l.addView(title);
         TextView author = new TextView(this);
-        author.setText(LibVisual.curMorph.plugin.getAuthor());
+        author.setText(LibVisual.mVisualObject.mMorph.plugin.getAuthor());
         l.addView(author);
 
         /* help */
@@ -79,7 +79,7 @@ public class LibVisualAboutMorph extends Activity
         title.setText("Help:");
         l.addView(title);
         TextView help = new TextView(this);
-        help.setText(LibVisual.curMorph.plugin.getHelp());
+        help.setText(LibVisual.mVisualObject.mMorph.plugin.getHelp());
         l.addView(help);
 
         /* license */
@@ -89,7 +89,7 @@ public class LibVisualAboutMorph extends Activity
         title.setText("License:");
         l.addView(title);
         TextView license = new TextView(this);
-        license.setText(LibVisual.curMorph.plugin.getLicense());
+        license.setText(LibVisual.mVisualObject.mMorph.plugin.getLicense());
         l.addView(license);
     }
 }

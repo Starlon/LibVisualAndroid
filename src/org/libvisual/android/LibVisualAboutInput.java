@@ -50,15 +50,15 @@ public class LibVisualAboutInput extends Activity
         TextView head = new TextView(this);
         head.setTextAppearance(this, android.R.style.TextAppearance_Large);
         head.setTextColor(Color.WHITE);
-        head.setText(LibVisual.curInput.plugin.getPlugname()+" "+LibVisual.curInput.plugin.getVersion());
+        head.setText(LibVisual.mVisualObject.mInput.plugin.getPlugname()+" "+LibVisual.mVisualObject.mInput.plugin.getVersion());
         l.addView(head);
 
 
         /* description */
         TextView name = new TextView(this);
-        name.setText(LibVisual.curInput.plugin.getName());
+        name.setText(LibVisual.mVisualObject.mInput.plugin.getName());
         TextView desc = new TextView(this);
-        desc.setText(LibVisual.curInput.plugin.getAbout());
+        desc.setText(LibVisual.mVisualObject.mInput.plugin.getAbout());
         l.addView(name);
         l.addView(desc);
 
@@ -69,7 +69,7 @@ public class LibVisualAboutInput extends Activity
         title.setText("Author:");
         l.addView(title);
         TextView author = new TextView(this);
-        author.setText(LibVisual.curInput.plugin.getAuthor());
+        author.setText(LibVisual.mVisualObject.mInput.plugin.getAuthor());
         l.addView(author);
 
         /* help */
@@ -79,7 +79,7 @@ public class LibVisualAboutInput extends Activity
         title.setText("Help:");
         l.addView(title);
         TextView help = new TextView(this);
-        help.setText(LibVisual.curInput.plugin.getHelp());
+        help.setText(LibVisual.mVisualObject.mInput.plugin.getHelp());
         l.addView(help);
 
         /* license */
@@ -89,7 +89,7 @@ public class LibVisualAboutInput extends Activity
         title.setText("License:");
         l.addView(title);
         TextView license = new TextView(this);
-        license.setText(LibVisual.curInput.plugin.getLicense());
+        license.setText(LibVisual.mVisualObject.mInput.plugin.getLicense());
         l.addView(license);
     }
 }

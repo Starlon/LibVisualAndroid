@@ -46,10 +46,13 @@ import android.widget.TextView;
 
 public class LibVisual extends Activity
 {
+
+    public static VisualObject mVisualObject;
+/*
     public static VisActor curActor;
     public static VisInput curInput;
     public static VisMorph curMorph;
-
+*/
     private final static String TAG = "LibVisual";
         
     private LibVisualSettings s;
@@ -62,9 +65,10 @@ public class LibVisual extends Activity
     private Boolean doMorph;
         
     /* implementend by liblvclient.so */
+/*
     private static native boolean init();
     private static native void deinit();
-
+*/
 
         
     /** Called when the activity is first created. */
@@ -80,7 +84,7 @@ public class LibVisual extends Activity
         s = new LibVisualSettings(this);
                         
         /* initialize libvisual */
-        init();
+        //init();
 
         /* do morph when changing actors? */
         defaultDoMorph = getString(R.string.default_do_morph);
@@ -91,28 +95,30 @@ public class LibVisual extends Activity
         /* morph plugin */
         defaultMorph = getString(R.string.default_plugin_morph);
         String prefMorph = s.getString("prefs_morph", defaultMorph);
-        curMorph = new VisMorph(prefMorph);
+        //curMorph = new VisMorph(prefMorph);
             
         /* input plugin */
         defaultInput = getString(R.string.default_plugin_input);
         String prefInput = s.getString("prefs_input", defaultInput);
-        curInput = new VisInput(prefInput);
+        //curInput = new VisInput(prefInput);
             
         /* actor plugin */
         defaultActor = getString(R.string.default_plugin_actor);
         String prefActor = s.getString("prefs_actor", defaultActor);
-        curActor = new VisActor(prefActor);
+        //curActor = new VisActor(prefActor);
+
+        mVisualObject = new VisualObject(256, 256, prefActor, prefInput, prefMorph);
 
         /* create bin */
-        curBin = new VisBin();
+        //curBin = new VisBin();
             
         /* set depth of bin */
-        curBin.setSupportedDepth(VisVideo.VISUAL_VIDEO_DEPTH_ALL);
-        curBin.setPreferredDepth(VisVideo.VISUAL_VIDEO_DEPTH_32BIT);
+        //curBin.setSupportedDepth(VisVideo.VISUAL_VIDEO_DEPTH_ALL);
+        //curBin.setPreferredDepth(VisVideo.VISUAL_VIDEO_DEPTH_32BIT);
     
             
         /* create new LibVisualBitmapView */
-        v = new LibVisualBitmapView(this, curActor, curInput, curMorph, curBin);
+        v = new LibVisualBitmapView(this, mVisualObject);
         
         /* set our LibVisualBitmapView as contentView */
         setContentView(v);
@@ -138,36 +144,27 @@ public class LibVisual extends Activity
             
             /* morph changed? */
             String newMorphName = s.getString("prefs_morph", defaultMorph);
+
+/*
             if(!curMorph.plugin.getPlugname().equals(newMorphName))
             {
                 Log.i(TAG, "Changing morph (\""+curMorph.plugin.getPlugname()+"\" -> \""+newMorphName+"\")");
                 curBin.setMorph(newMorphName);
                 curMorph = curBin.getMorph();
             }
-            
+  */          
             /* actor changed? */
+/*
             String newActorName = s.getString("prefs_actor", defaultActor);
             if(!curActor.plugin.getPlugname().equals(newActorName))
             {
                 Log.i(TAG, "Changing actor (\""+curActor.plugin.getPlugname()+"\" -> \""+newActorName+"\")");
                     
-                /* do morph? */
-                if(doMorph)
-                {
-                        /* enable morph */
-                }
-                else
-                {
-                        /* disable morph */
-                }
+                //curBin.switchActor(newActorName);
 
-                /* switch actor */
-                curBin.switchActor(newActorName);
-
-                /* get new actor */
-                curActor = curBin.getActor();
+                //curActor = curBin.getActor();
             }
-            
+  */          
 
             /* input changed? */
             
@@ -255,7 +252,7 @@ public class LibVisual extends Activity
     public void onDestroy()
     {
         /* deinitialize libvisual */
-        deinit();
+        //deinit();
             
         super.onDestroy();
     }

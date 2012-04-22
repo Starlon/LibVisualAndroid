@@ -26,28 +26,33 @@ package org.libvisual.android;
 
 
 
-/** VisMorph wrapper */
-public class VisMorph
+/** VisRectangle wrapper */
+public class VisRectangle
 {
-    public CPtr VisMorph;
-    public VisPlugin plugin;
+    public CPtr VisRectangle;
 
-    /** implemented by visual.c */
-    private native CPtr morphNew(String name);
-    private native int morphUnref(CPtr morphPtr);
-    private native CPtr morphGetPlugin(CPtr morphPtr);
+    private native CPtr rectangleNew(int x, int y, int width, int height);
+    private native int rectangleUnref(CPtr rectanglePtr);
+    private native int rectangleSet(int x, int y, int width, int height);
+    private native int rectangleCopy(int dest, int src);
+    private native int rectangleSetX(int x);
+    private native int rectangleGetX();
+    private native int rectangleSetY(int y);
+    private native int recttangleGetY();
+    private native int rectangleSetWidth(int width);
+    private native int rectangleGetWidth();
+    private native int rectangleSetHeight(int height);
+    private native int rectangleGetHeight();
         
-    public VisMorph(String name)
+        
+    public VisRectangle(int x, int y, int width, int height)
     {
-        VisMorph = morphNew(name);
-
-        plugin = new VisPlugin(morphGetPlugin(VisMorph));
+        VisRectangle = rectangleNew(x, y, width, height);
     }
 
     @Override
     public void finalize()
     {
-        morphUnref(VisMorph);
+        rectangleUnref(VisRectangle);
     }
 }
-

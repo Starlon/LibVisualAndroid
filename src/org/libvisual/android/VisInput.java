@@ -29,18 +29,24 @@ package org.libvisual.android;
 /** VisInput wrapper */
 public class VisInput
 {
-    public int VisInput;
+    public CPtr VisInput;
     public VisPlugin plugin;
-        
-    /** implemented by visual.c */
-    private native int inputNew(String name);
-    private native int inputUnref(int inputPtr);
-    private native int inputGetPlugin(int inputPtr);
 
+    /** implemented by visual.c */
+    private native CPtr inputNew(String name);
+    private native int inputUnref(CPtr inputPtr);
+    private native CPtr inputGetPlugin(CPtr inputPtr);
         
+    public VisInput(CPtr inputPtr)
+    {
+        VisInput = inputPtr;
+        plugin = new VisPlugin(inputGetPlugin(VisInput));
+    }
+
     public VisInput(String name)
     {
         VisInput = inputNew(name);
+
         plugin = new VisPlugin(inputGetPlugin(VisInput));
     }
 

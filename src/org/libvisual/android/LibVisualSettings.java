@@ -103,3 +103,4 @@ public class LibVisualSettings
                 _edit.putBoolean(key, value);
         }
 }
+

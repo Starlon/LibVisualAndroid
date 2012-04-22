@@ -21,33 +21,49 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
 
-package org.libvisual.android;
+#include <jni.h>
+#include <android/log.h>
+#include <android/bitmap.h>
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+#include <libvisual/libvisual.h>
+#include "visual.h"
 
 
 
-
-/** VisMorph wrapper */
-public class VisMorph
+/** local variables */
+static struct
 {
-    public CPtr VisMorph;
-    public VisPlugin plugin;
 
-    /** implemented by visual.c */
-    private native CPtr morphNew(String name);
-    private native int morphUnref(CPtr morphPtr);
-    private native CPtr morphGetPlugin(CPtr morphPtr);
-        
-    public VisMorph(String name)
+}_l;
+
+
+
+extern "C" {
+
+/** VisRectangle.rectangleNew() */
+JNIEXPORT jobject JNICALL Java_org_libvisual_android_VisRectangle_rectangleNew(JNIEnv * env, jobject  jobj, jint x, jint y, jint width, jint height)
+{
+    LOGI("VisRectangle.rectangleNew()");
+
+    VisRectangle *rect = visual_rectangle_new(x, y, width, height);
+
+    jobject obj;
+    jclass tempClass;
+
+    tempClass = env->FindClass("org/libvisual/android/CPtr");
+
+    obj = env->AllocObject( tempClass );
+    if (obj)
     {
-        VisMorph = morphNew(name);
-
-        plugin = new VisPlugin(morphGetPlugin(VisMorph));
+        env->SetLongField( obj, env->GetFieldID( tempClass, "peer", "J" ), (jlong)rect);
     }
+    return obj;
 
-    @Override
-    public void finalize()
-    {
-        morphUnref(VisMorph);
-    }
 }
 
+
+
+}

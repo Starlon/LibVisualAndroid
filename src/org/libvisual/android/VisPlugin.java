@@ -29,19 +29,19 @@ package org.libvisual.android;
 /** VisPlugin wrapper */
 public class VisPlugin
 {
-    public int VisPlugin;
+    public CPtr VisPlugin;
 
     /** implemented by visual.c */
-    private native String pluginGetName(int pluginPtr);
-    private native String pluginGetPlugname(int pluginPtr);
-    private native String pluginGetAuthor(int pluginPtr);
-    private native String pluginGetVersion(int pluginPtr);
-    private native String pluginGetAbout(int pluginPtr);
-    private native String pluginGetHelp(int pluginPtr);
-    private native String pluginGetLicense(int pluginPtr);
+    private native String pluginGetName(CPtr pluginPtr);
+    private native String pluginGetPlugname(CPtr pluginPtr);
+    private native String pluginGetAuthor(CPtr pluginPtr);
+    private native String pluginGetVersion(CPtr pluginPtr);
+    private native String pluginGetAbout(CPtr pluginPtr);
+    private native String pluginGetHelp(CPtr pluginPtr);
+    private native String pluginGetLicense(CPtr pluginPtr);
         
         
-    public VisPlugin(int pluginPtr)
+    public VisPlugin(CPtr pluginPtr)
     {
         VisPlugin = pluginPtr;
     }
